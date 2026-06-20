@@ -32,7 +32,7 @@ export default function Dashboard() {
 
             <Sidebar />
 
-            <div className="ml-64 p-6">
+            <div className="ml-64 p-6 text-black">
 
                 <Navbar />
 
