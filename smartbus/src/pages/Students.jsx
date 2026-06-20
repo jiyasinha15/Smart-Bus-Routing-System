@@ -1,3 +1,5 @@
+import Sidebar from "../components/Sidebar";
+
 const students = [
   {
     id: 1,
@@ -17,69 +19,164 @@ const students = [
     route: "Hostel A → Engineering Block",
     bus: "U-22",
   },
+  {
+    id: 4,
+    name: "Aman Verma",
+    route: "Main Gate → Block C",
+    bus: "U-25",
+  },
 ];
 
 export default function Students() {
   return (
-    <div className="p-6">
+    <>
+      <Sidebar />
 
-      <div className="flex justify-between items-center mb-6">
+      <div className="ml-72 min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white p-8">
 
-        <h1 className="text-3xl font-bold">
-          👨‍🎓 Students
-        </h1>
+        {/* Header */}
 
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
-          + Add Student
-        </button>
+        <div className="flex justify-between items-center mb-8">
 
-      </div>
+          <div>
+            <h1 className="text-4xl font-bold">
+              👨‍🎓 Student Management
+            </h1>
 
-      <div className="bg-white rounded-xl shadow p-5">
+            <p className="text-slate-400 mt-2">
+              Manage student transportation records
+            </p>
+          </div>
 
-        <table className="w-full">
+          <button className="bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 rounded-xl font-semibold hover:scale-105 transition-all duration-300">
+            + Add Student
+          </button>
 
-          <thead>
-            <tr className="border-b">
-              <th className="text-left py-3">Name</th>
-              <th className="text-left py-3">Route</th>
-              <th className="text-left py-3">Bus</th>
-              <th className="text-left py-3">Actions</th>
-            </tr>
-          </thead>
+        </div>
 
-          <tbody>
+        {/* Stats Cards */}
 
-            {students.map((student) => (
-              <tr
-                key={student.id}
-                className="border-b hover:bg-gray-50"
-              >
-                <td className="py-3">{student.name}</td>
-                <td className="py-3">{student.route}</td>
-                <td className="py-3">{student.bus}</td>
+        <div className="grid md:grid-cols-3 gap-5 mb-8">
 
-                <td className="py-3 space-x-2">
+          <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6">
+            <p className="text-slate-400">
+              Total Students
+            </p>
 
-                  <button className="bg-yellow-500 text-white px-3 py-1 rounded">
-                    Edit
-                  </button>
+            <h2 className="text-4xl font-bold mt-2">
+              1248
+            </h2>
+          </div>
 
-                  <button className="bg-red-500 text-white px-3 py-1 rounded">
-                    Delete
-                  </button>
+          <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6">
+            <p className="text-slate-400">
+              Active Routes
+            </p>
 
-                </td>
+            <h2 className="text-4xl font-bold mt-2">
+              8
+            </h2>
+          </div>
 
+          <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6">
+            <p className="text-slate-400">
+              Present Today
+            </p>
+
+            <h2 className="text-4xl font-bold mt-2">
+              1103
+            </h2>
+          </div>
+
+        </div>
+
+        {/* Search */}
+
+        <div className="mb-6">
+
+          <input
+            type="text"
+            placeholder="🔍 Search Student..."
+            className="w-full bg-white/5 backdrop-blur-xl border border-slate-700 rounded-2xl p-4 text-white outline-none"
+          />
+
+        </div>
+
+        {/* Student Table */}
+
+        <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl overflow-hidden">
+
+          <table className="w-full">
+
+            <thead className="border-b border-slate-700">
+
+              <tr>
+                <th className="p-5 text-left">Student</th>
+                <th className="p-5 text-left">Route</th>
+                <th className="p-5 text-left">Bus</th>
+                <th className="p-5 text-left">Actions</th>
               </tr>
-            ))}
 
-          </tbody>
+            </thead>
 
-        </table>
+            <tbody>
+
+              {students.map((student) => (
+                <tr
+                  key={student.id}
+                  className="border-b border-slate-800 hover:bg-white/5 transition-all duration-300"
+                >
+
+                  <td className="p-5">
+
+                    <div className="flex items-center gap-3">
+
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center font-bold">
+                        {student.name.charAt(0)}
+                      </div>
+
+                      <span>
+                        {student.name}
+                      </span>
+
+                    </div>
+
+                  </td>
+
+                  <td className="p-5">
+                    {student.route}
+                  </td>
+
+                  <td className="p-5">
+
+                    <span className="bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full">
+                      {student.bus}
+                    </span>
+
+                  </td>
+
+                  <td className="p-5 space-x-2">
+
+                    <button className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-lg">
+                      Edit
+                    </button>
+
+                    <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg">
+                      Delete
+                    </button>
+
+                  </td>
+
+                </tr>
+              ))}
+
+            </tbody>
+
+          </table>
+
+        </div>
 
       </div>
-
-    </div>
+    </>
   );
 }

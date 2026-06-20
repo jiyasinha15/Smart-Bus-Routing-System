@@ -1,3 +1,5 @@
+import Sidebar from "../components/Sidebar";
+
 const Schedule = () => {
   return (
     <main className="p-6">

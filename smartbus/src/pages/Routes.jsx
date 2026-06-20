@@ -1,3 +1,5 @@
+import Sidebar from "../components/Sidebar";
+
 const routes = [
  {
    id:1,

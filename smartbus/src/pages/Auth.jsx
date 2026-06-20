@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Sidebar from "../components/Sidebar";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);

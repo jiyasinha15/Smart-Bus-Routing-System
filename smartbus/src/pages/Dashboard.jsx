@@ -32,9 +32,21 @@ export default function Dashboard() {
 
             <Sidebar />
 
-            <div className="ml-64 p-6 text-black">
+            <div className="ml-72 p-6 text-black">
 
                 <Navbar />
+
+                <div className="mb-8">
+
+                    <h1 className="text-4xl font-bold text-white">
+                        Smart Transport Dashboard
+                    </h1>
+
+                    <p className="text-slate-400 mt-2">
+                        Monitor routes, buses, drivers and fuel efficiency
+                    </p>
+
+                </div>
 
                 {/* Cards */}
 
@@ -74,7 +86,7 @@ export default function Dashboard() {
 
                 <div className="grid md:grid-cols-3 gap-6 mt-6">
 
-                    <div className="bg-slate-900 border border-slate-700 rounded-2xl p-5 shadow md:col-span-2">
+                    <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-2xl p-5 shadow md:col-span-2">
 
                         <h2 className="text-xl font-bold mb-4">
                             Weekly Ridership
@@ -102,7 +114,7 @@ export default function Dashboard() {
 
                     </div>
 
-                    <div className="bg-slate-900 border border-slate-700 rounded-2xl p-5 shadow">
+                    <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-2xl p-5 shadow">
 
                         <h2 className="text-xl font-bold">
                             Weather
@@ -126,66 +138,66 @@ export default function Dashboard() {
 
                 </div>
 
-                {/* Table + Alerts */}
+                <div className="grid md:grid-cols-3 gap-6 mt-6">
 
-                <div className="grid md:grid-cols-2 gap-6 mt-6">
+                    <div className="md:col-span-2 bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-5">
 
-                    <div className="bg-slate-900 border border-slate-700 rounded-2xl p-5 shadow">
-
-                        <h2 className="text-xl font-bold mb-4">
-                            Active Buses
+                        <h2 className="text-xl font-bold text-white mb-4">
+                            🗺️ Live Fleet Map
                         </h2>
 
-                        <table className="w-full">
-
-                            <thead>
-                                <tr>
-                                    <th>Bus</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>U-12</td>
-                                    <td>🟢 Running</td>
-                                </tr>
-
-                                <tr>
-                                    <td>U-18</td>
-                                    <td>🟢 Running</td>
-                                </tr>
-
-                                <tr>
-                                    <td>U-22</td>
-                                    <td>🔴 Maintenance</td>
-                                </tr>
-                            </tbody>
-
-                        </table>
+                        <div className="h-[350px] rounded-2xl overflow-hidden">
+                            {/* MapContainer yaha */}
+                        </div>
 
                     </div>
 
-                    <div className="bg-slate-900 border border-slate-700 rounded-2xl p-5 shadow">
+                    <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-5">
 
-                        <h2 className="text-xl font-bold mb-4">
-                            Recent Alerts
+                        <h2 className="text-xl font-bold text-white mb-4">
+                            🚨 Recent Alerts
                         </h2>
 
-                        <div className="space-y-4">
+                        <div className="space-y-3">
 
-                            <div className="bg-red-200 p-3 rounded text-black">
-                                ⚠ Heavy Traffic Near Main Gate
+                            <div className="bg-red-500/20 border border-red-500 p-3 rounded-xl text-white">
+                                Route A delayed
                             </div>
 
-                            <div className="bg-yellow-200 p-3 rounded text-black">
-                                ⚠ Route A Delayed
+                            <div className="bg-yellow-500/20 border border-yellow-500 p-3 rounded-xl text-white">
+                                Heavy Traffic
                             </div>
 
-                            <div className="bg-blue-200 p-3 rounded text-black">
-                                ℹ New Schedule Uploaded
+                            <div className="bg-green-500/20 border border-green-500 p-3 rounded-xl text-white">
+                                Fleet Healthy
                             </div>
 
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {/* Table + Alerts */}
+
+                <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-2xl p-5 shadow">
+
+                    <h2 className="text-xl font-bold mb-4">
+                        Recent Alerts
+                    </h2>
+
+                    <div className="space-y-4">
+
+                        <div className="bg-red-200 p-3 rounded text-black">
+                            ⚠ Heavy Traffic Near Main Gate
+                        </div>
+
+                        <div className="bg-yellow-200 p-3 rounded text-black">
+                            ⚠ Route A Delayed
+                        </div>
+
+                        <div className="bg-blue-200 p-3 rounded text-black">
+                            ℹ New Schedule Uploaded
                         </div>
 
                     </div>
@@ -195,5 +207,7 @@ export default function Dashboard() {
             </div>
 
         </div>
+
+        
     );
 }
