@@ -1,114 +1,156 @@
-import { useState } from "react";
 import Sidebar from "../components/Sidebar";
+import { FaUserTie, FaPhone, FaIdCard } from "react-icons/fa";
 
-export default function DriverManagement() {
-  const [drivers, setDrivers] = useState([
-    {
-      id: 1,
-      name: "Raj Kumar",
-      phone: "9876543210",
-      license: "DL12345",
-      bus: "U-12",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Amit Singh",
-      phone: "9876543211",
-      license: "DL56789",
-      bus: "U-18",
-      status: "Active",
-    },
-    {
-      id: 3,
-      name: "Rakesh Yadav",
-      phone: "9876543212",
-      license: "DL98765",
-      bus: "U-22",
-      status: "On Leave",
-    },
-  ]);
+const drivers = [
+  {
+    id: 1,
+    name: "Raj Kumar",
+    phone: "+91 9876543210",
+    license: "DL12345",
+    status: "Available",
+  },
+  {
+    id: 2,
+    name: "Amit Singh",
+    phone: "+91 9876543211",
+    license: "DL67890",
+    status: "On Route",
+  },
+  {
+    id: 3,
+    name: "Rakesh Yadav",
+    phone: "+91 9876543212",
+    license: "DL24680",
+    status: "Leave",
+  },
+];
 
+export default function Drivers() {
   return (
-    <div className="p-6">
+    <>
+      <Sidebar />
 
-      <div className="flex justify-between items-center mb-6">
+      <div className="ml-72 min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white p-8">
 
-        <h1 className="text-3xl font-bold">
-          👨‍✈️ Driver Management
-        </h1>
+        {/* Header */}
 
-        <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">
-          + Add Driver
-        </button>
+        <div className="flex justify-between items-center mb-8">
 
-      </div>
+          <div>
+            <h1 className="text-4xl font-bold">
+              👨‍✈️ Driver Management
+            </h1>
 
-      <div className="bg-white rounded-xl shadow overflow-hidden">
+            <p className="text-slate-400 mt-2">
+              Manage drivers and route assignments
+            </p>
+          </div>
 
-        <table className="w-full">
+          <button className="bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 rounded-xl font-semibold">
+            + Add Driver
+          </button>
 
-          <thead className="bg-gray-100">
+        </div>
 
-            <tr>
-              <th className="p-4 text-left">Driver Name</th>
-              <th className="p-4 text-left">Phone</th>
-              <th className="p-4 text-left">License No.</th>
-              <th className="p-4 text-left">Assigned Bus</th>
-              <th className="p-4 text-left">Status</th>
-              <th className="p-4 text-left">Actions</th>
-            </tr>
+        {/* Stats */}
 
-          </thead>
+        <div className="grid md:grid-cols-3 gap-5 mb-8">
 
-          <tbody>
+          <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6">
+            <p className="text-slate-400">Total Drivers</p>
+            <h2 className="text-4xl font-bold mt-2">20</h2>
+          </div>
 
-            {drivers.map((driver) => (
-              <tr
-                key={driver.id}
-                className="border-b hover:bg-gray-50"
-              >
-                <td className="p-4">{driver.name}</td>
+          <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6">
+            <p className="text-slate-400">Available</p>
+            <h2 className="text-4xl font-bold mt-2">15</h2>
+          </div>
 
-                <td className="p-4">{driver.phone}</td>
+          <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6">
+            <p className="text-slate-400">On Route</p>
+            <h2 className="text-4xl font-bold mt-2">5</h2>
+          </div>
 
-                <td className="p-4">{driver.license}</td>
+        </div>
 
-                <td className="p-4">{driver.bus}</td>
+        {/* Search */}
 
-                <td className="p-4">
+        <div className="mb-8">
+          <input
+            type="text"
+            placeholder="🔍 Search Driver..."
+            className="w-full bg-white/5 border border-slate-700 rounded-2xl p-4 text-white outline-none"
+          />
+        </div>
+
+        {/* Driver Cards */}
+
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+          {drivers.map((driver) => (
+            <div
+              key={driver.id}
+              className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6 hover:border-cyan-500 transition-all duration-300"
+            >
+
+              <div className="flex items-center gap-4 mb-5">
+
+                <div className="w-14 h-14 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center text-xl font-bold">
+                  {driver.name.charAt(0)}
+                </div>
+
+                <div>
+                  <h2 className="text-xl font-bold">
+                    {driver.name}
+                  </h2>
+
                   <span
-                    className={`px-3 py-1 rounded-full text-white text-sm ${
-                      driver.status === "Active"
-                        ? "bg-green-500"
-                        : "bg-yellow-500"
+                    className={`text-sm px-3 py-1 rounded-full ${
+                      driver.status === "Available"
+                        ? "bg-green-500/20 text-green-300"
+                        : driver.status === "On Route"
+                        ? "bg-yellow-500/20 text-yellow-300"
+                        : "bg-red-500/20 text-red-300"
                     }`}
                   >
                     {driver.status}
                   </span>
-                </td>
+                </div>
 
-                <td className="p-4 space-x-2">
+              </div>
 
-                  <button className="bg-yellow-500 text-white px-3 py-1 rounded">
-                    Edit
-                  </button>
+              <div className="space-y-3">
 
-                  <button className="bg-red-500 text-white px-3 py-1 rounded">
-                    Delete
-                  </button>
+                <p className="flex items-center gap-2 text-slate-300">
+                  <FaPhone />
+                  {driver.phone}
+                </p>
 
-                </td>
+                <p className="flex items-center gap-2 text-slate-300">
+                  <FaIdCard />
+                  {driver.license}
+                </p>
 
-              </tr>
-            ))}
+              </div>
 
-          </tbody>
+              <div className="flex gap-3 mt-6">
 
-        </table>
+                <button className="flex-1 bg-cyan-600 py-2 rounded-xl">
+                  Edit
+                </button>
+
+                <button className="flex-1 bg-red-600 py-2 rounded-xl">
+                  Delete
+                </button>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
 
       </div>
-
-    </div>
+    </>
   );
 }

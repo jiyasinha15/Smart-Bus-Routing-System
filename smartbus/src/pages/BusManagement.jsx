@@ -1,124 +1,187 @@
-import { useState } from "react";
 import Sidebar from "../components/Sidebar";
+import { FaBus, FaUserTie, FaTools } from "react-icons/fa";
+
+const buses = [
+  {
+    id: 1,
+    busNo: "U-12",
+    driver: "Raj Kumar",
+    capacity: 50,
+    occupied: 45,
+    status: "Running",
+  },
+  {
+    id: 2,
+    busNo: "U-18",
+    driver: "Amit Singh",
+    capacity: 45,
+    occupied: 32,
+    status: "Running",
+  },
+  {
+    id: 3,
+    busNo: "U-22",
+    driver: "Rakesh Yadav",
+    capacity: 40,
+    occupied: 20,
+    status: "Maintenance",
+  },
+];
 
 export default function BusManagement() {
-  const [buses, setBuses] = useState([
-    {
-      id: 1,
-      busNo: "U-12",
-      driver: "Raj Kumar",
-      capacity: 50,
-      status: "Running",
-    },
-    {
-      id: 2,
-      busNo: "U-18",
-      driver: "Amit Singh",
-      capacity: 45,
-      status: "Running",
-    },
-    {
-      id: 3,
-      busNo: "U-22",
-      driver: "Rakesh Yadav",
-      capacity: 40,
-      status: "Maintenance",
-    },
-  ]);
-
   return (
-    <div className="p-6">
+    <>
+      <Sidebar />
 
-      {/* Header */}
+      <div className="ml-72 min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white p-8">
 
-      <div className="flex justify-between items-center mb-6">
+        {/* Header */}
 
-        <h1 className="text-3xl font-bold">
-          🚌 Bus Management
-        </h1>
+        <div className="flex justify-between items-center mb-8">
 
-        <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">
-          + Add Bus
-        </button>
+          <div>
+            <h1 className="text-4xl font-bold">
+              🚌 Bus Management
+            </h1>
 
-      </div>
+            <p className="text-slate-400 mt-2">
+              Monitor fleet health and bus operations
+            </p>
+          </div>
 
-      {/* Search */}
+          <button className="bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 rounded-xl font-semibold">
+            + Add Bus
+          </button>
 
-      <div className="mb-5">
-        <input
-          type="text"
-          placeholder="Search Bus..."
-          className="w-full md:w-80 border rounded-lg p-3"
-        />
-      </div>
+        </div>
 
-      {/* Table */}
+        {/* Stats */}
 
-      <div className="bg-white rounded-xl shadow overflow-hidden">
+        <div className="grid md:grid-cols-3 gap-5 mb-8">
 
-        <table className="w-full">
+          <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-slate-400">Total Buses</p>
+                <h2 className="text-4xl font-bold mt-2">24</h2>
+              </div>
+              <FaBus className="text-4xl text-cyan-400" />
+            </div>
+          </div>
 
-          <thead className="bg-gray-100">
+          <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-slate-400">Active Drivers</p>
+                <h2 className="text-4xl font-bold mt-2">20</h2>
+              </div>
+              <FaUserTie className="text-4xl text-green-400" />
+            </div>
+          </div>
 
-            <tr>
-              <th className="p-4 text-left">Bus No</th>
-              <th className="p-4 text-left">Driver</th>
-              <th className="p-4 text-left">Capacity</th>
-              <th className="p-4 text-left">Status</th>
-              <th className="p-4 text-left">Actions</th>
-            </tr>
+          <div className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-slate-400">Maintenance</p>
+                <h2 className="text-4xl font-bold mt-2">4</h2>
+              </div>
+              <FaTools className="text-4xl text-orange-400" />
+            </div>
+          </div>
 
-          </thead>
+        </div>
 
-          <tbody>
+        {/* Search */}
 
-            {buses.map((bus) => (
-              <tr
+        <div className="mb-8">
+
+          <input
+            type="text"
+            placeholder="🔍 Search Bus..."
+            className="w-full bg-white/5 border border-slate-700 rounded-2xl p-4 text-white outline-none"
+          />
+
+        </div>
+
+        {/* Bus Cards */}
+
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+          {buses.map((bus) => {
+
+            const percentage =
+              (bus.occupied / bus.capacity) * 100;
+
+            return (
+              <div
                 key={bus.id}
-                className="border-b hover:bg-gray-50"
+                className="bg-white/5 backdrop-blur-xl border border-slate-700 rounded-3xl p-6 hover:border-cyan-500 transition-all duration-300"
               >
-                <td className="p-4">{bus.busNo}</td>
 
-                <td className="p-4">{bus.driver}</td>
+                <div className="flex justify-between items-center mb-4">
 
-                <td className="p-4">{bus.capacity}</td>
-
-                <td className="p-4">
+                  <h2 className="text-2xl font-bold">
+                    🚌 {bus.busNo}
+                  </h2>
 
                   <span
-                    className={`px-3 py-1 rounded-full text-sm text-white ${
+                    className={`px-3 py-1 rounded-full text-sm ${
                       bus.status === "Running"
-                        ? "bg-green-500"
-                        : "bg-red-500"
+                        ? "bg-green-500/20 text-green-300"
+                        : "bg-red-500/20 text-red-300"
                     }`}
                   >
                     {bus.status}
                   </span>
 
-                </td>
+                </div>
 
-                <td className="p-4 space-x-2">
+                <p className="text-slate-300 mb-2">
+                  👨‍✈️ Driver: {bus.driver}
+                </p>
 
-                  <button className="bg-yellow-500 text-white px-3 py-1 rounded">
-                    Edit
-                  </button>
+                <p className="text-slate-300 mb-4">
+                  Capacity: {bus.occupied}/{bus.capacity}
+                </p>
 
-                  <button className="bg-red-500 text-white px-3 py-1 rounded">
-                    Delete
-                  </button>
+                {/* Progress Bar */}
 
-                </td>
+                <div className="w-full h-3 bg-slate-700 rounded-full overflow-hidden mb-4">
 
-              </tr>
-            ))}
+                  <div
+                    className="h-full bg-gradient-to-r from-cyan-500 to-blue-600"
+                    style={{ width: `${percentage}%` }}
+                  />
 
-          </tbody>
+                </div>
 
-        </table>
+                <div className="flex justify-between items-center">
+
+                  <span className="text-cyan-400 font-semibold">
+                    {Math.round(percentage)}% Occupied
+                  </span>
+
+                  <div className="space-x-2">
+
+                    <button className="bg-cyan-600 px-4 py-2 rounded-lg">
+                      Edit
+                    </button>
+
+                    <button className="bg-red-600 px-4 py-2 rounded-lg">
+                      Delete
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+            );
+          })}
+
+        </div>
 
       </div>
-
-    </div>
+    </>
   );
 }

@@ -1,37 +1,118 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import LiveTracking from "./pages/LiveTracking";
 import Analytics from "./pages/Analytics";
 import RoutesPage from "./pages/Routes";
-import Students from "./pages/Students";
-import BusManagement from "./pages/BusManagement";
 import Alerts from "./pages/Alerts";
-import DriverManagement from "./pages/DriverManagement";
+import Students from "./pages/Students";
+import Drivers from "./pages/DriverManagement";
+import BusManagement from "./pages/BusManagement";
+import Settings from "./pages/Settings";
+
+const PrivateRoute = ({ children }) => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  return isLoggedIn ? children : <Navigate to="/" />;
+};
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
 
+        {/* Login Page */}
         <Route path="/" element={<Auth />} />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* Dashboard */}
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/tracking" element={<LiveTracking />} />
+        {/* Live Tracking */}
+        <Route
+          path="/tracking"
+          element={
+            <PrivateRoute>
+              <LiveTracking />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/analytics" element={<Analytics />} />
+        {/* Routes */}
+        <Route
+          path="/routes"
+          element={
+            <PrivateRoute>
+              <RoutesPage />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/routes" element={<RoutesPage />} />
+        {/* Analytics */}
+        <Route
+          path="/analytics"
+          element={
+            <PrivateRoute>
+              <Analytics />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/students" element={<Students />} />
+        {/* Alerts */}
+        <Route
+          path="/alerts"
+          element={
+            <PrivateRoute>
+              <Alerts />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/buses" element={<BusManagement />} />
+        {/* Students */}
+        <Route
+          path="/students"
+          element={
+            <PrivateRoute>
+              <Students />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/alerts" element={<Alerts />} />
+        {/* Drivers */}
+        <Route
+          path="/drivers"
+          element={
+            <PrivateRoute>
+              <Drivers />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/drivers" element={<DriverManagement />} />
+        {/* Buses */}
+        <Route
+          path="/buses"
+          element={
+            <PrivateRoute>
+              <BusManagement />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>

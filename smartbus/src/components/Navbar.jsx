@@ -16,6 +16,10 @@ export default function Navbar() {
         />
       </div>
 
+      <div className="text-slate-300 font-medium">
+        {new Date().toLocaleTimeString()}
+      </div>
+
     </div>
   );
 }

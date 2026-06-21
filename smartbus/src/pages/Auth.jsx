@@ -1,8 +1,20 @@
 import { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
+
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    localStorage.setItem("isLoggedIn", "true");
+    navigate("/dashboard");
+  };
+
+  const handleRegister = () => {
+    alert("Registration Successful!");
+    setIsLogin(true);
+  };
 
   return (
     <div className="min-h-screen bg-slate-900 flex items-center justify-center p-5">
@@ -136,6 +148,7 @@ export default function Auth() {
           {/* Main Button */}
 
           <button
+            onClick={isLogin ? handleLogin : handleRegister}
             className="w-full bg-blue-700 text-white p-3 rounded-lg font-semibold hover:bg-blue-800 transition"
           >
             {isLogin ? "Login" : "Register"}
@@ -145,7 +158,11 @@ export default function Auth() {
 
           <div className="flex items-center my-5">
             <div className="flex-1 border-t"></div>
-            <span className="px-3 text-gray-500">OR</span>
+
+            <span className="px-3 text-gray-500">
+              OR
+            </span>
+
             <div className="flex-1 border-t"></div>
           </div>
 
@@ -157,7 +174,7 @@ export default function Auth() {
             Continue with Google
           </button>
 
-          {/* Switch */}
+          {/* Switch Login/Register */}
 
           <p className="text-center mt-6 text-gray-600">
 
