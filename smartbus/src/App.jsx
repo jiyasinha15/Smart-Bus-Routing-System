@@ -10,6 +10,7 @@ import Students from "./pages/Students";
 import Drivers from "./pages/DriverManagement";
 import BusManagement from "./pages/BusManagement";
 import Settings from "./pages/Settings";
+import Reports from "./pages/Reports";
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -104,6 +105,8 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        <Route path="/reports" element={<Reports />} />
 
         <Route
           path="/settings"

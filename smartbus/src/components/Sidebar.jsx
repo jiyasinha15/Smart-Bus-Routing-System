@@ -8,13 +8,21 @@ import {
     FaUserTie,
     FaUserGraduate,
 } from "react-icons/fa";
+import { FaFilePdf } from "react-icons/fa";
 
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/");
+    };
     return (
-        <div className="w-72 h-screen bg-slate-950  border-r border-slate-800 text-white fixed">
+        <div className="w-72 h-screen bg-slate-950 border-r border-slate-800 text-white fixed flex flex-col overflow-hidden">
 
             <div className="p-8 border-b border-slate-700">
 
@@ -28,7 +36,7 @@ export default function Sidebar() {
 
             </div>
 
-            <ul className="p-5 space-y-3">
+            <ul className="p-5 space-y-3 flex-1 overflow-y-auto">
 
                 {/* Dashboard */}
                 <li>
@@ -115,6 +123,16 @@ export default function Sidebar() {
                     </Link>
                 </li>
 
+                <li>
+                    <Link
+                        to="/reports"
+                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 hover:text-cyan-400 transition-all duration-300"
+                    >
+                        <FaFilePdf />
+                        Reports
+                    </Link>
+                </li>
+
                 {/* Settings */}
                 <li>
                     <Link
@@ -129,6 +147,15 @@ export default function Sidebar() {
 
 
             </ul>
+
+            <div className="p-5 pb-10 border-t border-slate-800">
+                <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 py-3 rounded-xl font-semibold"
+                >
+                    🚪 Logout
+                </button>
+            </div>
         </div>
     );
 }
